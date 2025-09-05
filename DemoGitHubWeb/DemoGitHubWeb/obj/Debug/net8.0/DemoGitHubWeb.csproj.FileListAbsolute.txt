@@ -60,3 +60,13 @@ D:/SourceCode/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/ref/Dem
 /home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/DemoGitHubWeb.pdb
 /home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/DemoGitHubWeb.genruntimeconfig.cache
 /home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/ref/DemoGitHubWeb.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/DemoGitHubWeb.csproj.AssemblyReference.cache
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/obj/Debug/net8.0/DemoGitHubWeb.csproj.CopyComplete
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/ClosedXML.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/ClosedXML.Parser.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/DocumentFormat.OpenXml.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/DocumentFormat.OpenXml.Framework.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/ExcelNumberFormat.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/RBush.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/SixLabors.Fonts.dll
+/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/bin/Debug/net8.0/System.IO.Packaging.dll

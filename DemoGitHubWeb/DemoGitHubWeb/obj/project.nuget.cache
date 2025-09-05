@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "Ugou6lpFrCgtiZH1xxiZ9dUfuAGaSxe8Y9I2x8hniXIvJ9398GiuJ6IM4frBePS7h5+xhoDF6nC7cwq50e3xTQ==",
+  "dgSpecHash": "zUqKhcaRR8+dgzPg1V+9mG7Y0mxoT2Y4ZPNkAmD4kZra7oTNwT8zPS/b3Toi/JM/klbF8H+9yI01dQs9Y3vJMA==",
   "success": true,
   "projectFilePath": "/home/runner/work/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb/DemoGitHubWeb.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/closedxml/0.105.0/closedxml.0.105.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/closedxml.parser/2.0.0/closedxml.parser.2.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/documentformat.openxml/3.1.1/documentformat.openxml.3.1.1.nupkg.sha512",
+    "/home/runner/.nuget/packages/documentformat.openxml.framework/3.1.1/documentformat.openxml.framework.3.1.1.nupkg.sha512",
+    "/home/runner/.nuget/packages/excelnumberformat/1.1.0/excelnumberformat.1.1.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/rbush.signed/4.0.0/rbush.signed.4.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/sixlabors.fonts/1.0.0/sixlabors.fonts.1.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.io.packaging/8.0.1/system.io.packaging.8.0.1.nupkg.sha512"
+  ],
   "logs": []
 }

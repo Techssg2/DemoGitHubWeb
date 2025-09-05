@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<DemoGitHubWeb.Models.User>
+@{
     ViewData["Title"] = "User Page";
 }
 
@@ -8,6 +9,17 @@
 </div>
 
 <div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col">
+            <h2>User List</h2>
+        </div>
+        <div class="col-auto">
+            <a href="@Url.Action("ExportToExcel", "User")" class="btn btn-success">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to Excel
+            </a>
+        </div>
+    </div>
+    
     <script>
         function editRow(rowId) {
             document.getElementById('row-display-' + rowId).style.display = 'none';
@@ -38,87 +50,45 @@
             </tr>
         </thead>
         <tbody>
-            <tr id="row-display-1">
-                <td>1</td>
-                <td>Nguyen Van A</td>
-                <td>Male</td>
-                <td>nguyenvana@example.com</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary" onclick="editRow(1)">Edit</a>
-                    <a href="#" class="btn btn-sm btn-success" style="display:none;">Update</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="">Remove</a>
-                </td>
-            </tr>
-            <tr id="row-edit-1" style="display:none;">
-                <td>1</td>
-                <td><input type="text" class="form-control" value="Nguyen Van A" /></td>
-                <td>
-                    <select class="form-control">
-                        <option value="Male" selected>Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </td>
-                <td><input type="email" class="form-control" value="nguyenvana@example.com" /></td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-success" onclick="updateRow(1)">Update</a>
-                    <a href="#" class="btn btn-sm btn-secondary" onclick="cancelEdit(1)">Cancel</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="removeRow1(1)">Remove</a>
-                </td>
-            </tr>
-            <tr id="row-display-2">
-                <td>2</td>
-                <td>Tran Thi B</td>
-                <td>Female</td>
-                <td>tranthib@example.com</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary" onclick="editRow(2)">Edit</a>
-                    <a href="#" class="btn btn-sm btn-success" style="display:none;">Update</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="removeRow1(2)">Remove</a>
-                </td>
-            </tr>
-            <tr id="row-edit-2" style="display:none;">
-                <td>2</td>
-                <td><input type="text" class="form-control" value="Tran Thi B" /></td>
-                <td>
-                    <select class="form-control">
-                        <option value="Male">Male</option>
-                        <option value="Female" selected>Female</option>
-                    </select>
-                </td>
-                <td><input type="email" class="form-control" value="tranthib@example.com" /></td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-success" onclick="updateRow(2)">Update</a>
-                    <a href="#" class="btn btn-sm btn-secondary" onclick="cancelEdit(2)">Cancel</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="removeRow(2)">Remove</a>
-                </td>
-            </tr>
-            <tr id="row-display-3">
-                <td>3</td>
-                <td>Le Van C</td>
-                <td>Male</td>
-                <td>levanc@example.com</td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-primary" onclick="editRow(3)">Edit</a>
-                    <a href="#" class="btn btn-sm btn-success" style="display:none;">Update</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="removeRow(3)">Remove</a>
-                </td>
-            </tr>
-            <tr id="row-edit-3" style="display:none;">
-                <td>3</td>
-                <td><input type="text" class="form-control" value="Le Van C" /></td>
-                <td>
-                    <select class="form-control">
-                        <option value="Male" selected>Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </td>
-                <td><input type="email" class="form-control" value="levanc@example.com" /></td>
-                <td>
-                    <a href="#" class="btn btn-sm btn-success" onclick="updateRow(3)">Update</a>
-                    <a href="#" class="btn btn-sm btn-secondary" onclick="cancelEdit(3)">Cancel</a>
-                    <a href="#" class="btn btn-sm btn-danger" onclick="removeRow(3)">Remove</a>
-                </td>
-            </tr>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                var user = Model[i];
+                <tr id="row-display-@user.Id">
+                    <td>@user.Id</td>
+                    <td>@user.FullName</td>
+                    <td>@user.Gender</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-primary" onclick="editRow(@user.Id)">Edit</a>
+                        <a href="#" class="btn btn-sm btn-success" style="display:none;">Update</a>
+                        <a href="#" class="btn btn-sm btn-danger" onclick="removeRow(@user.Id)">Remove</a>
+                    </td>
+                </tr>
+                <tr id="row-edit-@user.Id" style="display:none;">
+                    <td>@user.Id</td>
+                    <td><input type="text" class="form-control" value="@user.FullName" /></td>
+                    <td>
+                        <select class="form-control">
+                            @if (user.Gender == "Male")
+                            {
+                                <option value="Male" selected>Male</option>
+                                <option value="Female">Female</option>
+                            }
+                            else
+                            {
+                                <option value="Male">Male</option>
+                                <option value="Female" selected>Female</option>
+                            }
+                        </select>
+                    </td>
+                    <td><input type="email" class="form-control" value="@user.Email" /></td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-success" onclick="updateRow(@user.Id)">Update</a>
+                        <a href="#" class="btn btn-sm btn-secondary" onclick="cancelEdit(@user.Id)">Cancel</a>
+                        <a href="#" class="btn btn-sm btn-danger" onclick="removeRow(@user.Id)">Remove</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
