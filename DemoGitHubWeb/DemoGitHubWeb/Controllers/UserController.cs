@@ -15,6 +15,9 @@ public class UserController: Controller
 
     public IActionResult UserList()
     {
+        string userName = "JohnDoe";
+        string password = "P@ssw0rd!";
+        string Token = "abc123xyz456";
         _logger.LogInformation("Testing logging in UserController Index action.");
         return View();
     }
