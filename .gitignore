@@ -1,0 +1,21 @@
+# Build artifacts
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.json
+*.props
+
+# IDE files
+**/.vs/
+**/.vscode/
+**/.idea/
+*.user
+*.suo
+*.userprefs
+
+# OS files
+.DS_Store
+Thumbs.db
