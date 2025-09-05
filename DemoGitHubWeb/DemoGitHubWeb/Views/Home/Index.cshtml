@@ -6,3 +6,57 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<!-- Navigation Cards Section -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Quick Navigation</h3>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="h4 mb-0">🏠</span>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Home</h5>
+                    <p class="card-text">Return to the main homepage and get started with the application.</p>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">Go to Home</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="h4 mb-0">👥</span>
+                        </div>
+                    </div>
+                    <h5 class="card-title">User Management</h5>
+                    <p class="card-text">View and manage user accounts, edit user information, and handle user data.</p>
+                    <a asp-area="" asp-controller="User" asp-action="UserList" class="btn btn-success">View Users</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                            <span class="h4 mb-0">🔒</span>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Privacy Policy</h5>
+                    <p class="card-text">Learn about our privacy practices and how we protect your personal information.</p>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="btn btn-info">Read Privacy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
