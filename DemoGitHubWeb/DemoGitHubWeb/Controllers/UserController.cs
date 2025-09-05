@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoGitHubWeb.Controllers;
 
-public class UserController: Controller
+public class UserController : Controller
 {
     private readonly ILogger<UserController> _logger;
 
@@ -18,7 +18,7 @@ public class UserController: Controller
         _logger.LogInformation("Testing logging in UserController Index action.");
         return View();
     }
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
