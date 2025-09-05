@@ -7,6 +7,7 @@ namespace DemoGitHubWeb.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private static readonly string APIKey = "AIzaSyA-YourFakeGoogleAPIKeyForTesting1234\n";
 
     public HomeController(ILogger<HomeController> logger)
     {
