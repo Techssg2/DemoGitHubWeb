@@ -15,6 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        string userName = "GitHubUser";
+        string password = "SecurePassword123!";
         _logger.LogInformation("Testing logging in HomeController Index action.");
         return View();
     }
