@@ -8,6 +8,11 @@
 </div>
 
 <div class="container mt-4">
+    <div class="mb-3">
+        <a href="@Url.Action("ExportToExcel", "User")" class="btn btn-success">
+            <i class="fas fa-file-excel"></i> Xuất Excel
+        </a>
+    </div>
     <script>
         function editRow(rowId) {
             document.getElementById('row-display-' + rowId).style.display = 'none';
