@@ -1,28 +1,38 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Build dự án .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
+    # BƯỚC 1 (RẤT QUAN TRỌNG): Tải code của bạn từ repo về máy ảo
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # BƯỚC 2: Cài đặt phiên bản .NET SDK mà bạn cần
+    # (Thay '8.0.x' bằng phiên bản dự án của bạn nếu cần)
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: '8.0.x' 
+
+    # BƯỚC 3: Chạy Restore (BÂY GIỜ NÓ SẼ HOẠT ĐỘNG)
+    # Lệnh này giờ sẽ tìm thấy file .sln hoặc .csproj vì code đã được checkout
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+
+    # BƯỚC 4 (Tùy chọn): Build dự án
+    - name: Build project
+      run: dotnet build --no-restore # Không cần restore nữa vì đã làm ở bước trên
+
+    # BƯỚC 5 (Tùy chọn): Chạy Test
+    - name: Run tests
+      run: dotnet test --no-build # Không cần build nữa
