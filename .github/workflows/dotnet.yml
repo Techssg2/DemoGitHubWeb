@@ -22,27 +22,48 @@ jobs:
         working-directory: ./DemoGitHubWeb
 
     steps:
-    # Bước 1: Checkout (Tải code về máy ảo) - BẮT BUỘC
+    # Bước 1: Checkout
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Bước 2: Cài đặt .NET SDK (thay 8.0.x bằng phiên bản của bạn nếu cần)
+    # Bước 2: Setup .NET
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
-    # Bước 3: Restore (Khôi phục các gói NuGet)
-    # Lệnh này sẽ tự động chạy bên trong thư mục bạn đã chỉ định ở "defaults"
+    # Bước 3: Restore
     - name: Restore dependencies
       run: dotnet restore
 
-    # Bước 4: Build (Biên dịch dự án)
-    - name: Build project
-      # Thêm --no-restore vì chúng ta vừa restore ở bước trên, không cần làm lại
-      run: dotnet build --no-restore
+    # Bước 4: Publish
+    - name: Build and Publish Project
+      run: dotnet publish -c Release -o ./publish_output
 
-    # Bước 5: Test (Chạy mọi unit test có trong solution)
+    # Bước 5: Test
     - name: Run tests
-      # Thêm --no-build vì chúng ta vừa build ở bước trên
       run: dotnet test --no-build
+
+    # Bước 6: Upload Artifact (Với logic IF)
+    # ⭐️ DEMO 3: BƯỚC CÓ ĐIỀU KIỆN (IF)
+    # Chúng ta thêm điều kiện "if:". Bước này sẽ CHỈ CHẠY NẾU
+    # 1. Workflow này được kích hoạt bởi một 'push' (không phải Pull Request)
+    # 2. VÀ nhánh đó là 'main' (ref == 'refs/heads/main')
+    - name: Upload Build Artifact
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-app-${{ matrix.os }}
+        path: ./publish_output
+
+    # Bước 7: Thông báo khi thất bại (Error Handling)
+    # ⭐️ DEMO 4: CHẠY KHI THẤT BẠI
+    # Bước này có "if: failure()"
+    # Nó sẽ luôn bị bỏ qua (skip) nếu mọi thứ thành công.
+    # Nó sẽ CHỈ CHẠY NẾU bất kỳ bước nào ở trên (như Build hoặc Test) báo lỗi (màu đỏ).
+    - name: Notify on Failure
+      if: failure()
+      run: |
+        echo "🔴 BUILD HOẶC TEST ĐÃ THẤT BẠI!"
+        echo "Hãy kiểm tra log ở các bước trên để xem chi tiết lỗi."
+        echo "Đây là nơi bạn có thể thêm lệnh để gửi thông báo tới Slack, Discord hoặc Teams."
