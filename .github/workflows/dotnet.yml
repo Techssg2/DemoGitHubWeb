@@ -42,7 +42,9 @@ jobs:
 
     # Bước 5: Test
     - name: Run tests
-      run: dotnet test --no-build
+      run: |
+        echo "Starting tests triggered by user: ${{ github.actor }}"
+        dotnet test --no-build
 
     # Bước 6: Upload Artifact (Với logic IF)
     # ⭐️ DEMO 3: BƯỚC CÓ ĐIỀU KIỆN (IF)
