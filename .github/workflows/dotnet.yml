@@ -53,15 +53,16 @@ jobs:
     # 1. Workflow này được kích hoạt bởi một 'push' (không phải Pull Request)
     # 2. VÀ nhánh đó là 'main' (ref == 'refs/heads/main')
     - name: Upload Build Artifact
+      # Điều kiện IF vẫn giữ nguyên (chỉ chạy khi push vào main)
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v4
       with:
-        # Tên file zip sẽ bao gồm: Tên HĐH (từ matrix) VÀ Tên người thao tác
-        name: web-app-${{ matrix.os }}-${{ github.actor }}
-
-        # ⭐️ SỬA LỖI ĐƯỜNG DẪN:
-        # Chỉ đường dẫn đầy đủ (từ gốc repo) đến thư mục mà 'dotnet publish' đã tạo ra
-        # (Giả sử working-directory của bạn là ./DemoGitHubWeb)
+        # ⭐️ ĐÃ SỬA LỖI TÊN:
+        # Chúng ta loại bỏ biến 'matrix.os' (vì bạn không dùng matrix) 
+        # để tên file đẹp hơn và không bị dấu --
+        name: web-app-${{ github.actor }}
+        
+        # Đường dẫn này đã được xác nhận là ĐÚNG (đã tìm thấy 69 files)
         path: ./DemoGitHubWeb/publish_output
 
     # Bước 7: Thông báo khi thất bại (Error Handling)
