@@ -1,38 +1,48 @@
-name: Build dự án .NET
+# Tên của quy trình CI (Continuous Integration)
+name: .NET CI Build and Test
 
+# Kích hoạt workflow này khi có push hoặc pull request vào nhánh 'main'
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
+    # Chạy trên máy ảo Ubuntu mới nhất (do GitHub cung cấp)
     runs-on: ubuntu-latest
-    
+
+    # ⭐️ GIẢI QUYẾT LỖI MSB1003 TẠI ĐÂY ⭐️
+    # Chúng ta đặt thư mục làm việc mặc định cho TẤT CẢ các lệnh "run:"
+    # Bạn PHẢI thay đổi 'TenThuMucChuaFileSLN' thành tên thư mục thực tế của bạn
+    # Ví dụ: nếu file của bạn ở 'MyProject/MyProject.sln', bạn điền: ./MyProject
+    defaults:
+      run:
+        working-directory: ./DemoGitHubWeb
+
     steps:
-    # BƯỚC 1 (RẤT QUAN TRỌNG): Tải code của bạn từ repo về máy ảo
+    # Bước 1: Checkout (Tải code về máy ảo) - BẮT BUỘC
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # BƯỚC 2: Cài đặt phiên bản .NET SDK mà bạn cần
-    # (Thay '8.0.x' bằng phiên bản dự án của bạn nếu cần)
+    # Bước 2: Cài đặt .NET SDK (thay 8.0.x bằng phiên bản của bạn nếu cần)
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x' 
+        dotnet-version: '8.0.x'
 
-    # BƯỚC 3: Chạy Restore (BÂY GIỜ NÓ SẼ HOẠT ĐỘNG)
-    # Lệnh này giờ sẽ tìm thấy file .sln hoặc .csproj vì code đã được checkout
+    # Bước 3: Restore (Khôi phục các gói NuGet)
+    # Lệnh này sẽ tự động chạy bên trong thư mục bạn đã chỉ định ở "defaults"
     - name: Restore dependencies
       run: dotnet restore
 
-    # BƯỚC 4 (Tùy chọn): Build dự án
+    # Bước 4: Build (Biên dịch dự án)
     - name: Build project
-      run: dotnet build --no-restore # Không cần restore nữa vì đã làm ở bước trên
+      # Thêm --no-restore vì chúng ta vừa restore ở bước trên, không cần làm lại
+      run: dotnet build --no-restore
 
-    # BƯỚC 5 (Tùy chọn): Chạy Test
+    # Bước 5: Test (Chạy mọi unit test có trong solution)
     - name: Run tests
-      run: dotnet test --no-build # Không cần build nữa
+      # Thêm --no-build vì chúng ta vừa build ở bước trên
+      run: dotnet test --no-build
