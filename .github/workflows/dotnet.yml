@@ -44,6 +44,7 @@ jobs:
     - name: Run tests
       run: |
         echo "Starting tests triggered by user: ${{ github.actor }}"
+        echo "Condition for step Upload Build Artifact: ${{ github.ref }} -  ${{ github.event_name }}"
         dotnet test --no-build
 
     # Bước 6: Upload Artifact (Với logic IF)
