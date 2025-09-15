@@ -15,6 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        string name = "Admin'; DROP TABLE Users; --";
         _logger.LogInformation("Testing logging in HomeController Index action.");
         return View();
     }
