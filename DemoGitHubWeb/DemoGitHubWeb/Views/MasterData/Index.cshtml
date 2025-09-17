@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DemoGitHubWeb.Models.MasterDataItem>
+@{
+    ViewData["Title"] = "Master Data List";
+}
+<h2>Master Data List</h2>
+<a href="@Url.Action("Create")">Add New Item</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = item.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
