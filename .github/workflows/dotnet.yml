@@ -1,0 +1,78 @@
+# Tên của quy trình CI (Continuous Integration)
+name: .NET CI Build and Test
+
+# Kích hoạt workflow này khi có push hoặc pull request vào nhánh 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # Chạy trên máy ảo Ubuntu mới nhất (do GitHub cung cấp)
+    runs-on: ubuntu-latest
+
+    # ⭐️ GIẢI QUYẾT LỖI MSB1003 TẠI ĐÂY ⭐️
+    # Chúng ta đặt thư mục làm việc mặc định cho TẤT CẢ các lệnh "run:"
+    # Bạn PHẢI thay đổi 'TenThuMucChuaFileSLN' thành tên thư mục thực tế của bạn
+    # Ví dụ: nếu file của bạn ở 'MyProject/MyProject.sln', bạn điền: ./MyProject
+    defaults:
+      run:
+        working-directory: ./DemoGitHubWeb
+
+    steps:
+    # Bước 1: Checkout
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Bước 2: Setup .NET
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    # Bước 3: Restore
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # Bước 4: Publish
+    - name: Build and Publish Project
+      run: dotnet publish -c Release -o ./publish_output
+
+    # Bước 5: Test
+    - name: Run tests
+      run: |
+        echo "Starting tests triggered by user: ${{ github.actor }}"
+        echo "Condition for step Upload Build Artifact: ${{ github.ref }} -  ${{ github.event_name }}"
+        dotnet test --no-build
+
+    # Bước 6: Upload Artifact (Với logic IF)
+    # ⭐️ DEMO 3: BƯỚC CÓ ĐIỀU KIỆN (IF)
+    # Chúng ta thêm điều kiện "if:". Bước này sẽ CHỈ CHẠY NẾU
+    # 1. Workflow này được kích hoạt bởi một 'push' (không phải Pull Request)
+    # 2. VÀ nhánh đó là 'main' (ref == 'refs/heads/main')
+    - name: Upload Build Artifact
+      # Điều kiện IF vẫn giữ nguyên (chỉ chạy khi push vào main)
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: actions/upload-artifact@v4
+      with:
+        # ⭐️ ĐÃ SỬA LỖI TÊN:
+        # Chúng ta loại bỏ biến 'matrix.os' (vì bạn không dùng matrix) 
+        # để tên file đẹp hơn và không bị dấu --
+        name: web-app-${{ github.actor }}
+        
+        # Đường dẫn này đã được xác nhận là ĐÚNG (đã tìm thấy 69 files)
+        path: ./DemoGitHubWeb/publish_output
+
+    # Bước 7: Thông báo khi thất bại (Error Handling)
+    # ⭐️ DEMO 4: CHẠY KHI THẤT BẠI
+    # Bước này có "if: failure()"
+    # Nó sẽ luôn bị bỏ qua (skip) nếu mọi thứ thành công.
+    # Nó sẽ CHỈ CHẠY NẾU bất kỳ bước nào ở trên (như Build hoặc Test) báo lỗi (màu đỏ).
+    - name: Notify on Failure
+      if: failure()
+      run: |
+        echo "🔴 BUILD HOẶC TEST ĐÃ THẤT BẠI!"
+        echo "Hãy kiểm tra log ở các bước trên để xem chi tiết lỗi."
+        echo "Đây là nơi bạn có thể thêm lệnh để gửi thông báo tới Slack, Discord hoặc Teams."

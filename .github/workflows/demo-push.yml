@@ -1,0 +1,27 @@
+# Tên của workflow (để bạn dễ nhận diện trong tab Actions)
+name: Demo Push Đơn Giản
+
+# 1. PHẦN KÍCH HOẠT (TRIGGER)
+# Workflow này sẽ tự động chạy KHI NÀO?
+on:
+  push:
+    branches:
+      - main  # Chỉ chạy khi có người push lên nhánh "main"
+
+# 2. PHẦN HÀNH ĐỘNG (JOBS)
+jobs:
+  say-hello-job:
+    # Nó sẽ chạy trên một máy ảo Ubuntu (do GitHub cung cấp)
+    runs-on: ubuntu-latest
+    
+    # Một Job có nhiều bước (steps)
+    steps:
+      # Bước 1
+      - name: In ra thông báo chào mừng
+        # Chúng ta chỉ yêu cầu máy ảo chạy một lệnh "echo" đơn giản
+        run: echo "Hello World! Một commit vừa được đẩy lên!"
+        
+      # Bước 2
+      - name: Hiển thị tên người vừa push
+        # ${{ github.actor }} là một biến đặc biệt của GitHub
+        run: echo "Code vừa được push bởi: ${{ github.actor }}"
