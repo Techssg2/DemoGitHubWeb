@@ -17,6 +17,16 @@ public class UserController: Controller
     // Giả sử connectionString được lấy từ file config
     private string connectionString = "Server=myServer;Database=myDataBase;User Id=myUser;Password=myPassword;";
 
+    
+    public void ConnectToDatabase()
+    {
+        // LỖI: Mật khẩu nằm ngay trong code
+        string dbPass = "MySuperSecretPassword@123!";
+        string connectionString = "Server=db.example.com;User=admin;Password=" + dbPass;
+        
+        // ...
+    }
+    
     /// <summary>
     /// PHIÊN BẢN CÓ LỖ HỔNG BẢO MẬT
     /// Lấy thông tin người dùng từ cơ sở dữ liệu bằng username.
@@ -34,6 +44,7 @@ public class UserController: Controller
     
     public IActionResult UserList()
     {
+        var data = GetUser_Vulnerable("");
         _logger.LogInformation("Testing logging in UserController Index action.");
         return View();
     }

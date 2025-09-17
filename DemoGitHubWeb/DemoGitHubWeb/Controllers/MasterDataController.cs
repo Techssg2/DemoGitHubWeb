@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using DemoGitHubWeb.Models;
 
 namespace DemoGitHubWeb.Controllers
@@ -23,6 +24,15 @@ namespace DemoGitHubWeb.Controllers
         {
             return View();
         }
+        
+        
+        public void PingAddress(string ipAddress)
+        {
+            // LỖI: Chạy một tiến trình với đầu vào "thô" của người dùng.
+            // Người dùng có thể nhập: "8.8.8.8 && del /Q C:\*" (nếu là Windows)
+            // CodeQL sẽ phát hiện 'ipAddress' được dùng trong 'Process.Start'
+            Process.Start("cmd.exe", "/C ping " + ipAddress);
+        }
 
         [HttpPost]
         public IActionResult Create(MasterDataItem item)
@@ -34,6 +44,7 @@ namespace DemoGitHubWeb.Controllers
 
         public IActionResult Edit(int id)
         {
+            PingAddress("192.292.1.1");
             var item = masterData.FirstOrDefault(x => x.Id == id);
             if (item == null) return NotFound();
             return View(item);
