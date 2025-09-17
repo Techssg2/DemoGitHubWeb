@@ -2,7 +2,7 @@
 
 namespace DemoGitHubWeb.Service;
 
-public class VulnerableService
+public class Vulnerable
 {
     // Lỗi 1: SQL Injection (Tiêm nhiễm SQL)
     
