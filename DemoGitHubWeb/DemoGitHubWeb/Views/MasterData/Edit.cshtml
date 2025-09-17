@@ -1,0 +1,19 @@
+﻿@model DemoGitHubWeb.Models.MasterDataItem
+@{
+    ViewData["Title"] = "Edit Master Data Item";
+}
+<h2>Edit Master Data Item</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>
+
